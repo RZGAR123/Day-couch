@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <title>DayCoach</title>
+    
+    <!-- PWA: Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- PWA: Theme Color -->
+    <meta name="theme-color" content="#6c5ce7">
+    
+    <!-- PWA: iOS Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <!-- استایل -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="app-header">
+
+    <div>
+        <h1>📅 DayCoach</h1>
+        <p>برنامه امروزت</p>
+    </div>
+
+    <div class="date" id="todayDate">
+        امروز
+    </div>
+
+</header>
+
+
+<main>
+
+    <!-- =========================
+         صفحه امروز
+    ========================== -->
+
+    <div id="todayPage">
+
+        <!-- فعالیت فعلی -->
+
+        <section class="current-card">
+
+            <div class="section-title">
+                🎯 فعالیت فعلی
+            </div>
+
+            <h2 id="currentTask">
+                فعلاً فعالیتی در حال اجرا نیست
+            </h2>
+
+            <p id="currentTime">
+                منتظر برنامه بعدی هستیم
+            </p>
+
+            <button
+                id="startButton"
+                class="start-button"
+                type="button">
+
+                ▶️ شروع فعالیت
+
+            </button>
+
+        </section>
+
+
+        <!-- برنامه بعدی -->
+
+        <section class="next-card">
+
+            <div class="section-title">
+                ⏭️ برنامه بعدی
+            </div>
+
+            <h3 id="nextTask">
+                هنوز برنامه‌ای ثبت نشده
+            </h3>
+
+            <p id="nextTime">
+                —
+            </p>
+
+        </section>
+
+
+        <!-- آمار -->
+
+        <section class="stats">
+
+            <div class="stat">
+
+                <span>⭐</span>
+
+                <strong id="score">
+                    0
+                </strong>
+
+                <small>
+                    امتیاز
+                </small>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>✅</span>
+
+                <strong id="completed">
+                    0
+                </strong>
+
+                <small>
+                    انجام‌شده
+                </small>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>📋</span>
+
+                <strong id="total">
+                    0
+                </strong>
+
+                <small>
+                    برنامه‌ها
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <!-- گزارش روزانه -->
+
+        <section class="daily-report">
+
+            <div class="section-title">
+                📊 گزارش امروز
+            </div>
+
+            <div class="report-grid">
+
+                <div>
+                    <strong id="reportTotal">0</strong>
+                    <small>کل</small>
+                </div>
+
+                <div>
+                    <strong id="reportCompleted">0</strong>
+                    <small>کامل</small>
+                </div>
+
+                <div>
+                    <strong id="reportPartial">0</strong>
+                    <small>ناقص</small>
+                </div>
+
+                <div>
+                    <strong id="reportFailed">0</strong>
+                    <small>انجام‌نشده</small>
+                </div>
+
+            </div>
+
+
+            <div class="success-rate">
+
+                🎯 موفقیت امروز:
+
+                <strong id="successRate">
+                    0٪
+                </strong>
+
+            </div>
+
+
+            <div class="progress-container">
+
+                <div
+                    id="dailyProgress"
+                    class="daily-progress">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- افزودن برنامه -->
+
+        <button
+            class="add-button"
+            id="addActivity"
+            type="button">
+
+            ＋ افزودن برنامه
+
+        </button>
+
+
+        <!-- لیست برنامه‌ها -->
+
+        <section id="activityList">
+
+        </section>
+
+    </div>
+
+
+    <!-- =========================
+         صفحه گزارش
+    ========================== -->
+
+    <section
+        id="reportPage"
+        class="report-page hidden">
+
+        <div class="section-title">
+            📊 گزارش عملکرد
+        </div>
+
+<!-- انتخاب بازه گزارش -->
+<div class="report-period">
+
+    <button
+        id="weeklyReportBtn"
+        class="report-period-btn active">
+        📅 هفتگی
+    </button>
+
+    <button
+        id="monthlyReportBtn"
+        class="report-period-btn">
+        🗓️ ماهانه
+    </button>
+
+</div>
+      
+        <div class="report-cards">
+
+            <div class="report-card">
+
+                <span>📋</span>
+
+                <strong id="reportPageTotal">
+                    0
+                </strong>
+
+                <small>
+                    کل فعالیت‌ها
+                </small>
+
+            </div>
+
+
+            <div class="report-card">
+
+                <span>✅</span>
+
+                <strong id="reportPageCompleted">
+                    0
+                </strong>
+
+                <small>
+                    کامل
+                </small>
+
+            </div>
+
+
+            <div class="report-card">
+
+                <span>⚠️</span>
+
+                <strong id="reportPagePartial">
+                    0
+                </strong>
+
+                <small>
+                    ناقص
+                </small>
+
+            </div>
+
+
+            <div class="report-card">
+
+                <span>❌</span>
+
+                <strong id="reportPageFailed">
+                    0
+                </strong>
+
+                <small>
+                    انجام‌نشده
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="report-score">
+
+            <span>⭐ امتیاز</span>
+
+            <strong id="reportPageScore">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="report-success">
+
+            <div>
+                🎯 درصد موفقیت
+            </div>
+
+            <strong id="reportPageSuccess">
+                0٪
+            </strong>
+
+        </div>
+
+
+        <!-- =========================
+             تقویم عملکرد
+        ========================== -->
+
+        <section class="calendar-section">
+
+            <div class="section-title">
+                🗓️ تقویم عملکرد
+            </div>
+
+
+            <div class="calendar-header">
+
+                <button
+                    id="prevMonth"
+                    class="calendar-nav"
+                    type="button">
+
+                    ‹
+
+                </button>
+
+
+                <h3 id="calendarTitle">
+                    ماه
+                </h3>
+
+
+                <button
+                    id="nextMonth"
+                    class="calendar-nav"
+                    type="button">
+
+                    ›
+
+                </button>
+
+            </div>
+
+
+            <div class="calendar-weekdays">
+
+                <span>ش</span>
+                <span>ی</span>
+                <span>د</span>
+                <span>س</span>
+                <span>چ</span>
+                <span>پ</span>
+                <span>ج</span>
+
+            </div>
+
+
+            <div
+                id="calendarDays"
+                class="calendar-days">
+            </div>
+
+
+            <button
+                id="calendarToday"
+                class="calendar-today"
+                type="button">
+
+                📅 امروز
+
+            </button>
+
+
+            <!-- گزارش روز انتخاب‌شده -->
+
+            <div
+                id="selectedDayReport"
+                class="selected-day-report">
+
+                <p>
+                    📅 یک روز را از تقویم انتخاب کن.
+                </p>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+  <!-- =========================
+     صفحه جوایز
+========================== -->
+
+<section id="rewardsPage" class="rewards-page hidden">
+<div class="orb"></div>
+    <div class="section-title">
+        🎁 جوایز و عملکرد
+    </div>
+
+    <!-- سه کارت روزانه، هفتگی، ماهانه -->
+    <div class="rewards-cards">
+
+        <div class="reward-card">
+            <div class="reward-card-header">
+                <span>📅</span>
+                <h3>روزانه</h3>
+            </div>
+            <div class="reward-percent" id="dailyRewardPercent">۰٪</div>
+            <div class="progress-container">
+                <div id="dailyRewardProgress" class="daily-progress" style="width:0%"></div>
+            </div>
+        </div>
+
+        <div class="reward-card">
+            <div class="reward-card-header">
+                <span>📆</span>
+                <h3>هفتگی</h3>
+            </div>
+            <div class="reward-percent" id="weeklyRewardPercent">۰٪</div>
+            <div class="progress-container">
+                <div id="weeklyRewardProgress" class="daily-progress" style="width:0%"></div>
+            </div>
+        </div>
+
+        <div class="reward-card">
+            <div class="reward-card-header">
+                <span>🗓️</span>
+                <h3>ماهانه</h3>
+            </div>
+            <div class="reward-percent" id="monthlyRewardPercent">۰٪</div>
+            <div class="progress-container">
+                <div id="monthlyRewardProgress" class="daily-progress" style="width:0%"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- آمار پنج‌گانه (برای روزانه) -->
+    <div class="reward-stats">
+        <div class="reward-stat">
+            <span>📋</span>
+            <strong id="rewardTotal">0</strong>
+            <small>برنامه‌ها</small>
+        </div>
+        <div class="reward-stat">
+            <span>⭐</span>
+            <strong id="rewardScore">0</strong>
+            <small>امتیاز</small>
+        </div>
+        <div class="reward-stat">
+            <span>✅</span>
+            <strong id="rewardCompleted">0</strong>
+            <small>انجام‌شده</small>
+        </div>
+        <div class="reward-stat">
+            <span>⚠️</span>
+            <strong id="rewardPartial">0</strong>
+            <small>ناقص</small>
+        </div>
+        <div class="reward-stat">
+            <span>❌</span>
+            <strong id="rewardFailed">0</strong>
+            <small>انجام‌نشده</small>
+        </div>
+    </div>
+
+    <!-- بخش جایزه یا تنبیه -->
+    <div class="reward-decision" id="rewardDecision">
+        <div class="reward-decision-title">🎁 جایزه یا تنبیه</div>
+        <div class="reward-decision-text" id="rewardDecisionText">—</div>
+        <div class="reward-motivation" id="rewardMotivationText">🌟 امروز روز خوبی برای تلاش بیشتر است.</div>
+    </div>
+
+</section>
+
+<!-- =========================
+     صفحه تنظیمات
+========================== -->
+
+<section id="settingsPage" class="settings-page hidden">
+
+    <div class="section-title">
+        ⚙️ تنظیمات
+    </div>
+
+    <div class="settings-card">
+        <div class="settings-item">
+            <span>🌙 دارک مود</span>
+            <button id="darkModeToggle" class="settings-toggle">غیرفعال</button>
+        </div>
+    </div>
+
+</section>
+
+  
+</main>
+
+
+<!-- =========================
+     پنجره نتیجه فعالیت
+========================= -->
+
+<div
+    id="resultModal"
+    class="modal hidden">
+
+    <div class="modal-box">
+
+        <h2>
+            🏁 نتیجه فعالیت
+        </h2>
+
+        <p id="resultActivityTitle">
+            فعالیت
+        </p>
+
+        <p>
+            این فعالیت چطور پیش رفت؟
+        </p>
+
+
+        <div class="result-buttons">
+
+            <button
+                class="result-complete"
+                id="completeResult"
+                type="button">
+
+                ✅ کامل انجام شد
+
+                <small>
+                    +15 امتیاز
+                </small>
+
+            </button>
+
+
+            <button
+                class="result-partial"
+                id="partialResult"
+                type="button">
+
+                ⚠️ ناقص انجام شد
+
+                <small>
+                    +5 امتیاز
+                </small>
+
+            </button>
+
+
+            <button
+                class="result-failed"
+                id="failedResult"
+                type="button">
+
+                ❌ انجام نشد
+
+                <small>
+                    بدون امتیاز
+                </small>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     پنجره افزودن برنامه
+========================= -->
+
+<div
+    id="modal"
+    class="modal hidden">
+
+    <div class="modal-box">
+
+        <h2>
+            ➕ برنامه جدید
+        </h2>
+
+
+        <label>
+            عنوان فعالیت
+        </label>
+
+        <input
+            id="activityTitle"
+            type="text"
+            placeholder="مثلاً مطالعه ریاضی">
+
+
+        <label>
+            تاریخ
+        </label>
+
+        <input
+            id="activityDate"
+            type="date">
+
+
+        <div class="time-row">
+
+            <div>
+
+                <label>
+                    شروع
+                </label>
+
+                <input
+                    id="startTime"
+                    type="time">
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    پایان
+                </label>
+
+                <input
+                    id="endTime"
+                    type="time">
+
+            </div>
+
+        </div>
+
+
+        <label>
+            🔔 یادآوری
+        </label>
+
+        <select id="reminder">
+
+            <option value="0">
+                بدون یادآوری
+            </option>
+
+            <option value="5">
+                ۵ دقیقه قبل
+            </option>
+
+            <option
+                value="10"
+                selected>
+
+                ۱۰ دقیقه قبل
+
+            </option>
+
+            <option value="15">
+                ۱۵ دقیقه قبل
+            </option>
+
+            <option value="30">
+                ۳۰ دقیقه قبل
+            </option>
+
+        </select>
+
+
+        <div class="modal-buttons">
+
+            <button
+                id="saveActivity"
+                class="save-btn"
+                type="button">
+
+                💾 ذخیره
+
+            </button>
+
+
+            <button
+                id="cancelActivity"
+                class="cancel-btn"
+                type="button">
+
+                لغو
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     منوی پایین
+========================= -->
+
+<nav class="bottom-nav">
+
+    <button
+        class="nav-active"
+        type="button">
+
+        🏠
+        <span>
+            امروز
+        </span>
+
+    </button>
+
+
+    <button type="button">
+
+        📊
+        <span>
+            گزارش
+        </span>
+
+    </button>
+
+
+    <button type="button">
+
+        🎁
+        <span>
+            جوایز
+        </span>
+
+    </button>
+
+
+    <button type="button">
+
+        ⚙️
+        <span>
+            تنظیمات
+        </span>
+
+    </button>
+
+</nav>
+
+
+<script src="script.js"></script>
+
+  <!-- ثبت Service Worker -->
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+            .then(function(reg) {
+                console.log('✅ Service Worker ثبت شد:', reg);
+            })
+            .catch(function(error) {
+                console.error('❌ خطا در ثبت Service Worker:', error);
+            });
+    }
+</script>
+  
+</body>
+</html>
