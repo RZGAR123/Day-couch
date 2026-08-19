@@ -1,0 +1,55 @@
+ctx.shadowOffsetX = size * 0.03;
+            ctx.shadowOffsetY = size * 0.03;
+            ctx.strokeStyle = '#00b894';
+            ctx.lineWidth = size * 0.09;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+            const startX = cardX + cardW * 0.3;
+            const startY = cardY + cardH * 0.5;
+            const midX = cardX + cardW * 0.42;
+            const midY = cardY + cardH * 0.62;
+            const endX = cardX + cardW * 0.72;
+            const endY = cardY + cardH * 0.32;
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(midX, midY);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+
+            return canvas;
+        }
+
+        function downloadIcon(size) {
+            const canvas = drawIcon(size);
+            const link = document.createElement('a');
+            link.download = icon-${size}.png;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // نمایش پیش‌نمایش 512
+        window.onload = function() {
+            const canvas = drawIcon(512);
+            const target = document.getElementById('iconCanvas');
+            const ctx = target.getContext('2d');
+            ctx.drawImage(canvas, 0, 0);
+        };
+
+        // پلی‌فیل roundRect برای مرورگرهای قدیمی
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+                if (w < 2 * r) r = w / 2;
+                if (h < 2 * r) r = h / 2;
+                this.beginPath();
+                this.moveTo(x + r, y);
+                this.arcTo(x + w, y, x + w, y + h, r);
+                this.arcTo(x + w, y + h, x, y + h, r);
+                this.arcTo(x, y + h, x, y, r);
+                this.arcTo(x, y, x + w, y, r);
+                this.closePath();
+                return this;
+            };
+        }
+    </script>
+</body>
+</html>
