@@ -1,0 +1,1312 @@
+/* ======================================================
+   فونت و تنظیمات پایه
+====================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f0f4ff;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6c7a89;
+    --primary: #6c5ce7;
+    --primary-dark: #5a4bd1;
+    --secondary: #00b894;
+    --accent: #fd79a8;
+    --border: #e2e8f0;
+    --shadow: 0 8px 30px rgba(108, 92, 231, 0.15);
+    --gradient-1: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    --gradient-2: linear-gradient(135deg, #fd79a8, #e17055);
+    --gradient-3: linear-gradient(135deg, #00b894, #00cec9);
+}
+
+body {
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 90px;
+    transition: background 0.3s ease;
+}
+
+/* ======================================================
+   انیمیشن‌های عمومی
+====================================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-8px) scale(1.02); }
+}
+
+@keyframes ripple {
+    0% {
+        box-shadow: 0 0 0 0 rgba(108, 92, 231, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 0 20px rgba(108, 92, 231, 0);
+    }
+}
+
+/* ======================================================
+   هدر
+====================================================== */
+
+.app-header {
+    background: var(--card);
+    padding: 22px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+    animation: fadeInUp 0.6s ease;
+}
+
+.app-header h1 {
+    font-size: 24px;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.app-header p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.date {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+
+/* ======================================================
+   کارت‌ها
+====================================================== */
+
+.current-card,
+.next-card {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 22px;
+    margin-bottom: 16px;
+    border: none;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 0.7s ease;
+}
+
+.current-card {
+    border-top: 4px solid var(--secondary);
+}
+
+.current-card:hover,
+.next-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(108, 92, 231, 0.2);
+}
+
+.section-title {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.current-card h2 {
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.next-card h3 {
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+.current-card p,
+.next-card p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* ======================================================
+   دکمه شروع (با انیمیشن ریپل)
+====================================================== */
+
+#startButton {
+    width: 100%;
+    margin-top: 18px;
+    border: none;
+    background: var(--gradient-1);
+    color: white;
+    padding: 14px;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+#startButton:active {
+    transform: scale(0.96);
+    animation: ripple 0.6s ease;
+}
+
+#startButton:hover {
+    box-shadow: 0 8px 25px rgba(108, 92, 231, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ======================================================
+   آمار
+====================================================== */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+    animation: fadeInUp 0.8s ease;
+}
+
+.stat {
+    background: var(--card);
+    border: none;
+    border-radius: 20px;
+    padding: 16px 8px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
+
+.stat:hover {
+    transform: translateY(-4px);
+}
+
+.stat span {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 6px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 22px;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat small {
+    display: block;
+    color: var(--muted);
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+/* ======================================================
+   نوار پیشرفت (با انیمیشن سیال و گرادیان متحرک)
+====================================================== */
+
+.progress-container {
+    width: 100%;
+    height: 16px;
+    background: rgba(108, 92, 231, 0.1);
+    border-radius: 30px;
+    overflow: hidden;
+    margin-top: 12px;
+    position: relative;
+}
+
+.daily-progress {
+    height: 100%;
+    border-radius: 30px;
+    transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: linear-gradient(90deg, 
+        #6c5ce7, #a29bfe, #fd79a8, #e17055, #6c5ce7);
+    background-size: 300% 100%;
+    animation: shimmer 7s linear infinite;
+    position: relative;
+    box-shadow: 0 0 30px rgba(108, 92, 231, 0.3);
+}
+
+/* افکت گوی‌های رنگی روی نوار */
+.daily-progress::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(253, 121, 168, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(0, 206, 201, 0.3) 0%, transparent 50%);
+    animation: float 6s ease-in-out infinite;
+}
+
+/* نوارهای پیشرفت در صفحه جوایز */
+.reward-card .progress-container {
+    height: 10px;
+    background: rgba(108, 92, 231, 0.08);
+}
+
+.reward-card .daily-progress {
+    background: linear-gradient(90deg, 
+        #6c5ce7, #a29bfe, #fd79a8, #00b894, #6c5ce7);
+    background-size: 300% 100%;
+    animation: shimmer 8s linear infinite;
+}
+
+/* ======================================================
+   دکمه افزودن
+====================================================== */
+
+.add-button {
+    width: 100%;
+    border: none;
+    background: var(--gradient-1);
+    color: white;
+    padding: 16px;
+    border-radius: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 20px rgba(108, 92, 231, 0.3);
+}
+
+.add-button:active {
+    transform: scale(0.96);
+}
+
+.add-button:hover {
+    box-shadow: 0 8px 30px rgba(108, 92, 231, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ======================================================
+   لیست فعالیت‌ها
+====================================================== */
+
+.activity-item {
+    background: var(--card);
+    border: none;
+    border-radius: 18px;
+    padding: 16px;
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.3s;
+    animation: fadeInUp 0.5s ease;
+}
+
+.activity-item:hover {
+    transform: translateX(-4px);
+    box-shadow: 0 8px 30px rgba(108, 92, 231, 0.15);
+}
+
+.activity-done {
+    opacity: 0.6;
+}
+
+.activity-done h3 {
+    text-decoration: line-through;
+}
+
+.activity-running {
+    border-right: 4px solid var(--secondary);
+    background: linear-gradient(135deg, #f0fbf6, #ffffff);
+}
+
+.done-btn {
+    border: none;
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.done-btn:active {
+    transform: scale(0.9);
+}
+
+.delete-btn {
+    border: none;
+    background: linear-gradient(135deg, #fd79a8, #e17055);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.delete-btn:active {
+    transform: scale(0.9);
+}
+
+/* ======================================================
+   منوی پایین
+====================================================== */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 72px;
+    background: var(--card);
+    border-top: 2px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 -4px 30px rgba(0,0,0,0.05);
+}
+
+.bottom-nav button {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.2s;
+    position: relative;
+}
+
+.bottom-nav button span {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.bottom-nav .nav-active {
+    color: var(--primary);
+}
+
+.bottom-nav .nav-active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30%;
+    width: 40%;
+    height: 3px;
+    background: var(--gradient-1);
+    border-radius: 0 0 10px 10px;
+}
+
+.bottom-nav button:active {
+    transform: scale(0.9);
+}
+
+/* ======================================================
+   صفحه جوایز (با انیمیشن)
+====================================================== */
+
+.rewards-page {
+    padding-bottom: 20px;
+    animation: fadeInUp 0.6s ease;
+}
+
+.rewards-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 14px 0;
+}
+
+.reward-card {
+    background: var(--card);
+    border: none;
+    border-radius: 22px;
+    padding: 16px 8px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.reward-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 50px rgba(108, 92, 231, 0.2);
+}
+
+.reward-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.reward-card-header span {
+    font-size: 22px;
+}
+
+.reward-card-header h3 {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.reward-percent {
+    font-size: 26px;
+    font-weight: 900;
+    margin: 8px 0 10px;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ======================================================
+   آمار پنج‌گانه جوایز
+====================================================== */
+
+.reward-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.reward-stat {
+    background: var(--card);
+    border: none;
+    border-radius: 16px;
+    padding: 12px 4px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
+
+.reward-stat:hover {
+    transform: translateY(-4px);
+}
+
+.reward-stat span {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.reward-stat strong {
+    display: block;
+    font-size: 20px;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.reward-stat small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+/* ======================================================
+   بخش جایزه/تنبیه
+====================================================== */
+
+.reward-decision {
+    background: var(--card);
+    border: none;
+    border-radius: 24px;
+    padding: 22px;
+    margin-top: 14px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    animation: fadeInUp 0.9s ease;
+}
+
+.reward-decision-title {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.reward-decision-text {
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    transition: color 0.5s;
+}
+
+.reward-motivation {
+    font-size: 15px;
+    color: var(--muted);
+    font-style: italic;
+    border-top: 2px dashed var(--border);
+    padding-top: 14px;
+}
+
+/* ======================================================
+   تنظیمات
+====================================================== */
+
+.settings-page {
+    padding-bottom: 20px;
+}
+
+.settings-card {
+    background: var(--card);
+    border: none;
+    border-radius: 24px;
+    padding: 20px;
+    margin-top: 14px;
+    box-shadow: var(--shadow);
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.settings-item span {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.settings-toggle {
+    border: none;
+    background: var(--gradient-1);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.settings-toggle:active {
+    transform: scale(0.95);
+}
+
+.settings-toggle.dark-active {
+    background: linear-gradient(135deg, #2d3748, #4a5568);
+}
+
+/* ======================================================
+   دارک مود
+====================================================== */
+
+body.dark-mode {
+    --bg: #0f0e17;
+    --card: #1a1a2e;
+    --text: #fffffe;
+    --muted: #a7a9be;
+    --border: #2d2d44;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .bottom-nav {
+    background: rgba(26, 26, 46, 0.9);
+}
+
+body.dark-mode .date {
+    background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+}
+
+/* ======================================================
+   ریسپانسیو (موبایل)
+====================================================== */
+
+@media (max-width: 480px) {
+    .app-header {
+        padding: 16px 12px;
+    }
+    .app-header h1 {
+        font-size: 20px;
+    }
+    .rewards-cards {
+        grid-template-columns: 1fr;
+    }
+    .reward-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .reward-stats .reward-stat:nth-child(4),
+    .reward-stats .reward-stat:nth-child(5) {
+        grid-column: span 1;
+    }
+    .stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    .current-card, .next-card {
+        padding: 16px;
+    }
+}
+/* ======================================================
+   بخش‌های ازدست‌رفته: گزارش و نتیجه
+====================================================== */
+
+/* ---------- گزارش روزانه ---------- */
+
+.daily-report {
+    background: var(--card);
+    border: none;
+    border-radius: 24px;
+    padding: 22px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
+    animation: fadeInUp 0.8s ease;
+}
+
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.report-grid > div {
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 14px 6px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.report-grid > div:hover {
+    transform: translateY(-4px);
+}
+
+.report-grid strong {
+    display: block;
+    font-size: 22px;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.report-grid small {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.success-rate {
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.success-rate strong {
+    color: var(--secondary);
+    font-size: 22px;
+    margin-right: 6px;
+    font-weight: 900;
+}
+
+/* ---------- صفحه گزارش عملکرد ---------- */
+
+.report-page {
+    padding-bottom: 20px;
+    animation: fadeInUp 0.6s ease;
+}
+
+.report-period {
+    display: flex;
+    gap: 12px;
+    margin: 14px 0 18px;
+}
+
+.report-period-btn {
+    flex: 1;
+    border: 2px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    padding: 12px 0;
+    border-radius: 16px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+}
+
+.report-period-btn:active {
+    transform: scale(0.96);
+}
+
+.report-period-btn.active {
+    border-color: var(--primary);
+    background: var(--gradient-1);
+    color: white;
+    box-shadow: 0 4px 20px rgba(108, 92, 231, 0.3);
+}
+
+.report-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.report-card {
+    background: var(--card);
+    border: none;
+    border-radius: 20px;
+    padding: 18px 12px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
+
+.report-card:hover {
+    transform: translateY(-4px);
+}
+
+.report-card span {
+    display: block;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.report-card strong {
+    display: block;
+    font-size: 24px;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.report-card small {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.report-score,
+.report-success {
+    background: var(--card);
+    border: none;
+    border-radius: 20px;
+    padding: 18px 20px;
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
+
+.report-score:hover,
+.report-success:hover {
+    transform: translateY(-4px);
+}
+
+.report-score span,
+.report-success div {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.report-score strong {
+    font-size: 26px;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.report-success strong {
+    color: var(--secondary);
+    font-size: 26px;
+    font-weight: 900;
+}
+
+/* ---------- تقویم ---------- */
+
+.calendar-section {
+    background: var(--card);
+    border: none;
+    border-radius: 24px;
+    padding: 22px;
+    margin-top: 18px;
+    box-shadow: var(--shadow);
+    animation: fadeInUp 0.9s ease;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.calendar-header h3 {
+    font-size: 18px;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.calendar-nav {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 14px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 28px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.calendar-nav:active {
+    transform: scale(0.9);
+}
+
+.calendar-nav:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.calendar-weekdays span {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 6px 0;
+    font-weight: 700;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar-day {
+    aspect-ratio: 1 / 1;
+    border: none;
+    border-radius: 14px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.calendar-day:active {
+    transform: scale(0.9);
+}
+
+.calendar-day.empty {
+    background: transparent;
+    cursor: default;
+}
+
+.calendar-day.today {
+    background: var(--gradient-1);
+    color: white;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+
+.calendar-day.has-activity::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--secondary);
+}
+
+.calendar-day.today.has-activity::after {
+    background: white;
+}
+
+.calendar-day.selected {
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 20px rgba(108, 92, 231, 0.2);
+}
+
+.calendar-today {
+    width: 100%;
+    margin-top: 16px;
+    border: none;
+    border-radius: 14px;
+    padding: 12px;
+    background: var(--bg);
+    color: var(--primary);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.calendar-today:active {
+    transform: scale(0.96);
+}
+
+.calendar-today:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.selected-day-report {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--bg);
+    border-radius: 16px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    animation: fadeInUp 0.5s ease;
+}
+
+.selected-report-header {
+    font-size: 16px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: var(--text);
+}
+
+.selected-report-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.selected-report-stats > div {
+    text-align: center;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 8px 4px;
+    box-shadow: var(--shadow);
+}
+
+.selected-report-stats strong {
+    display: block;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.selected-report-stats small {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.selected-report-extra {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.selected-report-extra p {
+    text-align: center;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 6px 4px;
+    font-size: 12px;
+    box-shadow: var(--shadow);
+}
+
+.selected-report-activities {
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.selected-activity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 8px 12px;
+    margin-top: 6px;
+    box-shadow: var(--shadow);
+}
+
+.selected-activity span {
+    font-size: 18px;
+}
+
+.selected-activity div {
+    display: flex;
+    flex-direction: column;
+}
+
+.selected-activity strong {
+    font-size: 14px;
+}
+
+.selected-activity small {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+/* ---------- پنجره نتیجه فعالیت ---------- */
+
+.result-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.result-buttons button {
+    border: none;
+    border-radius: 16px;
+    padding: 16px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.3s;
+    box-shadow: var(--shadow);
+}
+
+.result-buttons button:active {
+    transform: scale(0.96);
+}
+
+.result-buttons small {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.result-complete {
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    color: white;
+}
+
+.result-partial {
+    background: linear-gradient(135deg, #fdcb6e, #f39c12);
+    color: white;
+}
+
+.result-failed {
+    background: linear-gradient(135deg, #fd79a8, #e17055);
+    color: white;
+}
+
+/* ---------- مودال ---------- */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 480px;
+    background: var(--card);
+    border-radius: 28px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: fadeInUp 0.4s ease;
+}
+
+.modal-box h2 {
+    margin-bottom: 20px;
+    font-weight: 900;
+}
+
+.modal-box label {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.modal-box input,
+.modal-box select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: 2px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.modal-box input:focus,
+.modal-box select:focus {
+    border-color: var(--primary);
+}
+
+.time-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.modal-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.modal-buttons button {
+    border: none;
+    padding: 14px;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.modal-buttons button:active {
+    transform: scale(0.96);
+}
+
+.save-btn {
+    background: var(--gradient-1);
+    color: white;
+    box-shadow: 0 4px 20px rgba(108, 92, 231, 0.3);
+}
+
+.cancel-btn {
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* ---------- حالت خالی (empty state) ---------- */
+
+.empty-state {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 15px;
+    box-shadow: var(--shadow);
+    animation: fadeInUp 0.6s ease;
+}
+
+/* ---------- ریسپانسیو برای موبایل ---------- */
+
+@media (max-width: 480px) {
+    .report-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .report-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+    .report-score,
+    .report-success {
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+    }
+    .selected-report-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .selected-report-extra {
+        grid-template-columns: 1fr;
+    }
+    .modal-box {
+        padding: 20px;
+    }
+}
