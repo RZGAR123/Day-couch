@@ -1,0 +1,26 @@
+{
+  "name": "DayCoach - برنامه روزانه",
+  "short_name": "DayCoach",
+  "description": "مربی روزانه برای مدیریت فعالیت‌ها و برنامه‌ریزی",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f0f4ff",
+  "theme_color": "#6c5ce7",
+  "orientation": "portrait-primary",
+  "lang": "fa",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
