@@ -124,7 +124,7 @@ function getTodayActivities() {
 
 function getWeeklyActivities() {
     const now = new Date();
-    const dayOfWeek = now.getDay();
+    const dayOfWeek = now.getDay(); // 0=Sunday
     const daysFromSaturday = (dayOfWeek + 1) % 7;
     const start = new Date(now);
     start.setDate(now.getDate() - daysFromSaturday);
@@ -147,33 +147,33 @@ function getMonthlyActivities() {
 }
 
 // ======================================================
-// ۷. لیست‌های جایزه/تنبیه (مختصر)
+// ۷. لیست‌های جایزه/تنبیه
 // ======================================================
 
 const rewardPools = {
     daily: {
         ranges: [
-            { min:0, max:10, type:'punish', texts:['🍽️ امشب ظرف‌ها رو بشور.','📱 یک ساعت بدون گوشی باش.'], motivations:['دیسپلین رو بیار تو زندگیت...','نظم، کلید موفقیت پایدار است.'] },
-            { min:11, max:20, type:'punish', texts:['میز شام رو بعد از غذا تمیز کن.','🍃 ۱۵ دقیقه پیاده‌روی اجباری.'], motivations:['بی‌احساس شو!','قدرت در عمل است.'] },
-            { min:21, max:30, type:'punish', texts:['کف زمین رو بعد از شام تمیز کن.','🚶 ۲۰ دقیقه پیاده‌روی سریع.'], motivations:['قدرت واقعی در کنترل ذهن است.','تمرکز بر کارهای کوچک.'] },
-            { min:31, max:40, type:'punish', texts:['به جای فیلم دیدن، روزت رو بنویس.','📝 لیست کارهای فردا رو بنویس.'], motivations:['هر روز ادامه بده تا حسرت نخوری.','نوشتن، ذهن را سازماندهی می‌کند.'] },
-            { min:41, max:50, type:'neutral', texts:['📊 عملکردت قابل قبول بود.','⚖️ امروز نه خوب نه بد.'], motivations:['نیمه راه، بهتر از نقطه صفر است.','فردا با برنامه‌ریزی بهتر.'] },
-            { min:51, max:60, type:'reward', texts:['🎉 امروز خوب بودی!','🎈 ۲۰ دقیقه استراحت کن.'], motivations:['پیشرفت کوچک، پیروزی بزرگ است.','به راهت ادامه بده.'] },
-            { min:61, max:70, type:'reward', texts:['🎉 عالی! یه فیلم کوتاه ببین.','🍫 یه شکلات به خودت جایزه بده.'], motivations:['داری پیشرفت می‌کنی.','این مسیر رو ادامه بده.'] },
-            { min:71, max:80, type:'reward', texts:['🎉 بسیار عالی!','🏆 یه فعالیت دلخواه انجام بده.'], motivations:['تو یک قهرمانی.','به توانایی‌هایت ایمان داشته باش.'] },
-            { min:81, max:90, type:'reward', texts:['🎉 فوق‌العاده!','🏅 یه پیاده‌روی طولانی برو.'], motivations:['به خودت افتخار کن.','این روز رو به خاطر بسپار.'] },
-            { min:91, max:100, type:'reward', texts:['🎉 بی‌نظیر!','🏆 یه روز استراحت کامل.'], motivations:['امروز روز تو بود.','هیچ‌کس نمی‌تونه متوقف‌ت کنه.'] }
+            { min:0, max:10, type:'punish', texts:['🍽️ امشب ظرف‌ها رو بشور.','📱 یک ساعت بدون گوشی باش.','🧹 یه گوشه خونه رو جارو کن.'], motivations:['دیسپلین رو بیار تو زندگیت...','نظم، کلید موفقیت پایدار است.','با یک کار کوچک امروز، فردا را می‌سازی.'] },
+            { min:11, max:20, type:'punish', texts:['میز شام رو بعد از غذا تمیز کن.','🍃 ۱۵ دقیقه پیاده‌روی اجباری.','🧠 یه صفحه از یه کتاب غیردرسی بخون.'], motivations:['بی‌احساس شو!','قدرت در عمل است.','هر کار کوچک، قدمی به سوی نظم است.'] },
+            { min:21, max:30, type:'punish', texts:['کف زمین رو بعد از شام تمیز کن.','🚶 ۲۰ دقیقه پیاده‌روی سریع.','💧 یک لیوان آب اضافه بنوش و ۵ دقیقه نفس عمیق بکش.'], motivations:['قدرت واقعی این نیست که وزنه بلند کنی؛ این که ذهنت را کنترل کنی.','ذهن قوی، زندگی قوی می‌سازد.','تمرکز بر کارهای کوچک، قدرت بزرگ می‌آورد.'] },
+            { min:31, max:40, type:'punish', texts:['به جای فیلم دیدن، روزت رو بنویس.','📝 لیست کارهای فردا رو با اولویت‌بندی بنویس.','🧘 ۱۰ دقیقه مدیتیشن کن.'], motivations:['هر روز ادامه بده تا حسرت خواسته‌هات تو قلبت نمونه.','نوشتن، ذهن را سازماندهی می‌کند.','قدم‌های کوچک روزانه، کوه‌های بزرگ را جابه‌جا می‌کنند.'] },
+            { min:41, max:50, type:'neutral', texts:['📊 عملکردت قابل قبول بود، ولی می‌تونی بهتر باشی.','⚖️ امروز نه خوب نه بد، فردا رو قوی شروع کن.','🧩 یه معما حل کن تا ذهنت فعال بشه.'], motivations:['نیمه راه، بهتر از نقطه صفر است.','فردا با برنامه‌ریزی بهتر، موفق‌تر خواهی بود.','هر روز فرصت تازه‌ای برای پیشرفت است.'] },
+            { min:51, max:60, type:'reward', texts:['🎉 امروز خوب بودی! یه لیوان آب میوه تازه به خودت هدیه بده.','🎈 ۲۰ دقیقه گوشی به دست استراحت کن.','🌿 یه پیاده‌روی کوتاه در هوای آزاد.'], motivations:['پیشرفت کوچک، پیروزی بزرگ است.','به راهت ادامه بده، داری به هدف نزدیک می‌شی.','ثبات در عملکرد، رمز موفقیت است.'] },
+            { min:61, max:70, type:'reward', texts:['🎉 عالی! امروز یه فیلم کوتاه یا یه مستند جذاب ببین.','🍫 یه شکلات تلخ به خودت جایزه بده.','📖 نیم ساعت کتاب غیردرسی بخون.'], motivations:['داری پیشرفت می‌کنی، به خودت افتخار کن.','این مسیر رو ادامه بده، نتیجه‌اش رو می‌بینی.','عملکرد خوب امروز، فردای بهتری می‌سازد.'] },
+            { min:71, max:80, type:'reward', texts:['🎉 بسیار عالی! امروز یه قهوه یا چای خاص به خودت هدیه بده.','🏆 یه فعالیت دلخواه (مثلاً یه بازی یا موسیقی) انجام بده.','🌟 یه پیام مثبت به یکی از دوستانت بفرست.'], motivations:['تو یک قهرمانی، امروز روز تو بود.','به توانایی‌هایت ایمان داشته باش.','هر روز بهتر از دیروز، این یعنی رشد.'] },
+            { min:81, max:90, type:'reward', texts:['🎉 فوق‌العاده! امروز یه غذای موردعلاقه سفارش بده.','🏅 یه پیاده‌روی طولانی در طبیعت یا پارک.','🎁 یه هدیه کوچک برای خودت بخر.'], motivations:['به خودت افتخار کن، این روز رو به خاطر بسپار.','تو توانایی شگفت‌انگیزی داری.','این عملکرد نشان می‌دهد که می‌توانی هر کاری کنی.'] },
+            { min:91, max:100, type:'reward', texts:['🎉 بی‌نظیر! امروز یه جشن کوچک برای خودت بگیر.','🏆 یه روز استراحت کامل یا یه تفریح خاص.','🌟 به خودت بگو: "من بهترین هستم".'], motivations:['امروز روز تو بود، این بهترین عملکردته.','هیچ‌کس نمی‌تونه متوقف‌ت کنه وقتی اینطور باشی.','این موفقیت رو جشن بگیر و برای فردا برنامه‌ریزی کن.'] }
         ]
     },
     weekly: {
         ranges: [
-            { min:0, max:40, type:'punish', texts:['📉 هفته ضعیفی داشتی.'], motivations:['هفته بعد جبران کن.'] },
-            { min:41, max:44, type:'punish', texts:['📉 نزدیک بود موفق شی!'], motivations:['فقط یک قدم دیگر.'] },
-            { min:45, max:50, type:'reward', texts:['🎁 هفته خوب بود!'], motivations:['به همین روال ادامه بده.'] },
-            { min:51, max:60, type:'reward', texts:['🎁 عالی!'], motivations:['هفته خوبی داشتی.'] },
-            { min:61, max:70, type:'reward', texts:['🎁 خیلی خوب!'], motivations:['داری عالی پیش می‌ری.'] },
-            { min:71, max:80, type:'reward', texts:['🎁 عالی‌ترین!'], motivations:['هفته‌ات بی‌نظیر بود.'] },
-            { min:81, max:100, type:'reward', texts:['🎁 افسانه‌ای!'], motivations:['هفته‌ای که هیچ‌وقت فراموش نمی‌کنی.'] }
+            { min:0, max:40, type:'punish', texts:['📉 هفته ضعیفی داشتی، این هفته یه کار اضافه رو تقبل کن.','🧹 کل خونه رو یه بار جارو کن.','📝 لیست کارهایی که این هفته انجام ندادی رو بنویس.'], motivations:['هفته بعد می‌تونی جبران کنی، از همون امروز شروع کن.','هر شکست، درس بزرگی است.','هفته جدید، فرصت جدید.'] },
+            { min:41, max:44, type:'punish', texts:['📉 نزدیک بود موفق شی! این هفته یه کار اضافه (مثل مرتب کردن کمد) انجام بده.','⏰ یه روز زودتر بیدار شو و کارهای عقب‌افتاده رو انجام بده.','📖 یه کتاب انگیزشی بخون.'], motivations:['فقط یک قدم دیگه، هفته بعد حتماً می‌رسی.','نزدیک بودی، پس می‌تونی.','ناامید نشو، موفقیت در یک قدمی توست.'] },
+            { min:45, max:50, type:'reward', texts:['🎁 هفته خوب بود! یه فیلم یا سریال موردعلاقه ببین.','🍕 یه پیتزا یا غذای خاص سفارش بده.','🌳 یه پیاده‌روی طولانی در آخر هفته.'], motivations:['به همین روال ادامه بده، هفته بعد بهتر می‌شه.','این هفته خوب بود، با قدرت ادامه بده.','پیشرفت مداوم، کلید موفقیت است.'] },
+            { min:51, max:60, type:'reward', texts:['🎁 عالی! این هفته یه روز استراحت کامل به خودت بده.','🎮 یه بازی یا سرگرمی دلخواه.','☕ یه قهوه یا چای خاص در کافه‌ای دنج.'], motivations:['هفته خوبی داشتی، به خودت افتخار کن.','ادامه بده، داری عالی پیش می‌ری.','موفقیت، حاصل تکرار کارهای درست است.'] },
+            { min:61, max:70, type:'reward', texts:['🎁 خیلی خوب! این هفته یه خرید کوچک یا یه هدیه به خودت بده.','🎬 یه فیلم سینمایی برو ببین.','🍽️ یه رستوران خوب برو.'], motivations:['داری عالی پیش می‌ری، این هفته رو جشن بگیر.','این یکی از بهترین هفته‌های تو بود.','با این روند، به همه اهداف‌ت می‌رسی.'] },
+            { min:71, max:80, type:'reward', texts:['🎁 عالی‌ترین! این هفته یه سفر یک‌روزه یا طبیعت‌گردی برو.','🏆 یه جایزه بزرگ برای خودت در نظر بگیر.','🎉 یه مهمونی کوچک با دوستان نزدیک.'], motivations:['هفته‌ات بی‌نظیر بود، تو یک قهرمانی.','این موفقیت رو با دیگران تقسیم کن.','هیچ محدودیتی برای تو وجود نداره.'] },
+            { min:81, max:100, type:'reward', texts:['🎁 افسانه‌ای! این هفته یه سفر یا تفریح خاص برنامه‌ریزی کن.','🏅 یه جایزه ویژه (مثلاً یه وسیله‌ای که دوست داری) بخر.','🌟 این هفته رو به‌عنوان بهترین هفته‌ات ثبت کن.'], motivations:['هفته‌ای که هیچ‌وقت فراموش نمی‌کنی، تو افسانه‌ای.','تو توانایی هر کاری رو داری، این رو به خاطر بسپار.','این بهترین عملکردته، حالا برای هفته بعد هم برنامه‌ریزی کن.'] }
         ]
     }
 };
@@ -250,6 +250,7 @@ function render() {
     list.innerHTML = '';
     const today = getTodayDate();
     const todayActivities = activities.filter(act => act.date === today);
+    // حذف تکراری‌ها بر اساس id
     const unique = todayActivities.filter((act, index, self) =>
         index === self.findIndex(a => a.id === act.id)
     );
@@ -303,100 +304,117 @@ function render() {
     updateRewardsPage();
 }
 
-// شروع فعالیت
-function startActivity(activity) {
-    const now = getCurrentMinutes();
-    const plannedStart = getMinutes(activity.start);
+// شروع فعالیت با id
+function startActivityById(id) {
+    const activity = activities.find(a => a.id === id);
+    if (!activity) return;
+    
+    // اگر فعالیت دیگری در حال اجراست، آن را به حالت انتظار برگردان
+    activities.forEach(a => {
+        if (a.status === 'in_progress' && a.id !== id) {
+            a.status = 'pending';
+        }
+    });
+    
     activity.status = 'in_progress';
     activity.startedAt = new Date().toISOString();
-    activity.delayMinutes = Math.max(0, now - plannedStart);
+    
     saveData();
     render();
     updateCurrentActivity();
-}
-
-function startActivityById(id) {
-    const activity = activities.find(a => a.id === id);
-    if (!activity || activity.status !== 'pending') return;
-    const today = getTodayDate();
-    const now = getCurrentMinutes();
-    const start = getMinutes(activity.start);
-    const end = getMinutes(activity.end);
-    if (activity.date !== today) { alert('این فعالیت مربوط به امروز نیست.'); return; }
-    if (now < start) { alert('⏳ زمان این فعالیت هنوز نرسیده.'); return; }
-    if (now >= end) { alert('⏰ زمان این فعالیت گذشته است.'); return; }
-    startActivity(activity);
-}
-
-function startCurrentActivity() {
-    const today = getTodayDate();
-    const now = getCurrentMinutes();
-    const current = activities.find(act =>
-        act.date === today &&
-        act.status === 'pending' &&
-        now >= getMinutes(act.start) &&
-        now < getMinutes(act.end)
-    );
-    if (!current) { alert('در حال حاضر فعالیت فعالی وجود ندارد.'); return; }
-    startActivity(current);
+    updateStats();
+    updateRewardsPage();
 }
 
 // حذف فعالیت
 function deleteActivity(id) {
-    const exists = activities.some(a => a.id === id);
-    if (!exists) return;
-    if (!confirm('آیا مطمئنی می‌خواهی این فعالیت را حذف کنی؟')) return;
     activities = activities.filter(a => a.id !== id);
     saveData();
     render();
     updateCurrentActivity();
+    updateStats();
     updateRewardsPage();
 }
 
-// نتیجه فعالیت
+// شروع فعالیت فعلی (زمانی که دکمه اصلی شروع فشرده می‌شود)
+function startCurrentActivity() {
+    const today = getTodayDate();
+    const now = getCurrentMinutes();
+    
+    // پیدا کردن فعالیتی که الان در بازه زمانی آن هستیم و هنوز شروع نشده
+    const current = activities.find(act => 
+        act.date === today && 
+        act.status === 'pending' && 
+        now >= getMinutes(act.start) && 
+        now < getMinutes(act.end)
+    );
+    
+    if (!current) {
+        alert('فعلاً فعالیتی در زمان جاری برای شروع وجود ندارد.');
+        return;
+    }
+    
+    startActivityById(current.id);
+}
+
+// ======================================================
+// سیستم ثبت نتیجه فعالیت
+// ======================================================
+
 let selectedActivityId = null;
 
 function openResultModal(id) {
     const activity = activities.find(a => a.id === id);
-    if (!activity || activity.status !== 'in_progress') return;
+    if (!activity || activity.status !== 'in_progress') {
+        return;
+    }
     selectedActivityId = id;
     const titleEl = document.getElementById('resultActivityTitle');
-    if (titleEl) titleEl.textContent = 'فعالیت: ' + activity.title;
+    if (titleEl) {
+        titleEl.textContent = 'فعالیت: ' + activity.title;
+    }
     const modal = document.getElementById('resultModal');
-    if (modal) modal.classList.remove('hidden');
+    if (modal) {
+        modal.classList.remove('hidden');
+    }
 }
 
 function finishActivity(result, points) {
     const activity = activities.find(a => a.id === selectedActivityId);
     if (!activity || activity.status !== 'in_progress') {
-        document.getElementById('resultModal')?.classList.add('hidden');
+        const modal = document.getElementById('resultModal');
+        if (modal) modal.classList.add('hidden');
         selectedActivityId = null;
         return;
     }
+
     activity.status = result;
     activity.score = points;
     score += points;
     activity.finishedAt = new Date().toISOString();
+    
     saveData();
-    document.getElementById('resultModal')?.classList.add('hidden');
+    
+    const modal = document.getElementById('resultModal');
+    if (modal) modal.classList.add('hidden');
     selectedActivityId = null;
+    
     render();
     updateCurrentActivity();
     updateRewardsPage();
-    const msgs = {
+    
+    const messages = {
         completed: '🎉 عالی! +' + points + ' امتیاز گرفتی.',
         partial: '⚠️ فعالیت ناقص انجام شد. +' + points + ' امتیاز گرفتی.',
         failed: '❌ این فعالیت انجام نشد.'
     };
-    alert(msgs[result] || 'نتیجه ثبت شد.');
+    alert(messages[result] || 'نتیجه ثبت شد.');
 }
 
-// اتصال دکمه‌های نتیجه (بعد از بارگذاری)
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('completeResult')?.addEventListener('click', function() { finishActivity('completed', 15); });
-    document.getElementById('partialResult')?.addEventListener('click', function() { finishActivity('partial', 5); });
-    document.getElementById('failedResult')?.addEventListener('click', function() { finishActivity('failed', 0); });
-});
+// اتصال دکمه‌های نتیجه
+document.getElementById('completeResult')?.addEventListener('click', function() { finishActivity('completed', 15); });
+document.getElementById('partialResult')?.addEventListener('click', function() { finishActivity('partial', 5); });
+document.getElementById('failedResult')?.addEventListener('click', function() { finishActivity('failed', 0); });
 
 // ======================================================
 // ۱۰. فعالیت فعلی و برنامه بعدی
@@ -609,7 +627,7 @@ document.getElementById('monthlyReportBtn')?.addEventListener('click', function(
 });
 
 // ======================================================
-// ۱۵. تقویم شمسی (خلاصه)
+// ۱۵. تقویم شمسی
 // ======================================================
 
 let calendarYear, calendarMonth;
@@ -773,6 +791,7 @@ function showSelectedDayReport(year, month, day) {
     container.innerHTML = html;
 }
 
+// مقداردهی اولیه تقویم
 const todayJ = getTodayJalali();
 calendarYear = todayJ[0];
 calendarMonth = todayJ[1];
@@ -842,56 +861,66 @@ document.getElementById('saveActivity')?.addEventListener('click', function() {
     updateRewardsPage();
 });
 
+// تنظیم تاریخ امروز در فرم
 document.addEventListener('DOMContentLoaded', function() {
     const dateInput = document.getElementById('activityDate');
     if (dateInput) dateInput.value = getTodayDate();
 });
 
 // ======================================================
-// ۱۷. نوتیفیکیشن‌های چندباره (با Notification)
+// ۱۷. نوتیفیکیشن‌ها
 // ======================================================
 
 function requestNotificationPermission() {
-    if (!('Notification' in window)) return;
-    if (Notification.permission === 'granted') return;
+    if (!('Notification' in window)) {
+        console.log('مرورگر از Notification پشتیبانی نمی‌کند.');
+        return;
+    }
+    if (Notification.permission === 'granted') {
+        console.log('✅ مجوز اعلان قبلاً داده شده.');
+        return;
+    }
     if (Notification.permission !== 'denied') {
-        Notification.requestPermission();
+        Notification.requestPermission().then(function(permission) {
+            if (permission === 'granted') {
+                console.log('✅ مجوز اعلان دریافت شد.');
+            } else {
+                console.log('❌ مجوز اعلان رد شد.');
+            }
+        });
     }
 }
-requestNotificationPermission();
 
+// سیستم یادآوری (بر اساس reminder انتخابی کاربر)
 function checkMultiReminders() {
     const today = getTodayDate();
     const now = getCurrentMinutes();
+    
     activities.forEach(function(act) {
         if (act.date !== today) return;
         if (['completed','partial','failed'].includes(act.status)) return;
         if (!act.reminder || act.reminder === 0) return;
+        
         const start = getMinutes(act.start);
-        const reminderTimes = [
-            { offset: 10, label: '۱۰ دقیقه قبل' },
-            { offset: 5, label: '۵ دقیقه قبل' },
-            { offset: 2.5, label: '۲.۵ دقیقه قبل' },
-            { offset: 0, label: 'زمان شروع' }
-        ];
-        reminderTimes.forEach(function(item) {
-            const remindMin = start - item.offset;
-            if (now >= remindMin && now < remindMin + 0.5) {
-                const key = 'daycoach_reminded_' + act.id + '_' + item.offset;
-                if (localStorage.getItem(key)) return;
-                localStorage.setItem(key, 'true');
-                if ('Notification' in window && Notification.permission === 'granted') {
-                    new Notification('🔔 DayCoach', {
-                        body: `${act.title}\n⏰ ساعت ${act.start}\n${item.label}`,
-                        icon: 'icon-192.jpg',
-                        vibrate: [200, 100, 200],
-                        requireInteraction: true
-                    });
-                } else {
-                    alert(`🔔 یادآوری DayCoach\n\n${act.title}\n⏰ ساعت ${act.start}\n${item.label}`);
-                }
+        const remindMin = start - act.reminder;
+        
+        // اگر الان در دقیقه مناسب هستیم (با تلرانس ۱ دقیقه)
+        if (now >= remindMin && now < remindMin + 1) {
+            const key = 'daycoach_reminded_' + act.id + '_' + act.reminder;
+            if (localStorage.getItem(key)) return;
+            localStorage.setItem(key, 'true');
+            
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification('🔔 DayCoach', {
+                    body: `${act.title}\n⏰ ساعت ${act.start}\n${act.reminder} دقیقه قبل`,
+                    icon: 'icons/icon-192.png',
+                    vibrate: [200, 100, 200],
+                    requireInteraction: true
+                });
+            } else {
+                alert(`🔔 یادآوری DayCoach\n\n${act.title}\n⏰ ساعت ${act.start}\n${act.reminder} دقیقه قبل`);
             }
-        });
+        }
     });
 }
 
@@ -924,6 +953,14 @@ applyDarkMode(darkMode);
 // ======================================================
 // ۱۹. بروزرسانی دوره‌ای
 // ======================================================
+
+setInterval(function() {
+    updateExpiredActivities();
+    updateCurrentActivity();
+    updateStats();
+    updateRewardsPage();
+    checkMultiReminders();
+}, 30000);
 
 function updateExpiredActivities() {
     const today = getTodayDate();
@@ -958,14 +995,7 @@ updateCurrentActivity();
 updateStats();
 updateReportPage();
 updateRewardsPage();
+requestNotificationPermission();
 checkMultiReminders();
-
-setInterval(function() {
-    updateExpiredActivities();
-    updateCurrentActivity();
-    updateStats();
-    updateRewardsPage();
-    checkMultiReminders();
-}, 30000);
 
 console.log('✅ DayCoach با موفقیت بارگذاری شد.');
